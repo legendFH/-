@@ -1,0 +1,33 @@
+
+spring:
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://101.132.115.92:3306/fuhao?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegac
+
+    type: com.alibaba.druid.pool.DruidDataSource
+
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    filters: stat,wall
+    maxPoolPreparedStatementPerConnectionSize: 20
+    useGlobalDataSourceStat: true
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+  redis:
+    host: 118.89.244.208
+
+server:
+  port: 7071
+#mybatis:
+  #configuration:
+   # map-underscore-to-camel-case: true
+    #开启驼峰命名规则 实体类的属性值和数据库字段不一样

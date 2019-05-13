@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="css/style2.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery.js"></script>
+
+</head>
+
+
+<body>
+
+	<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="#">首页</a></li>
+    </ul>
+    </div>
+    
+    <div class="mainindex">
+    
+    
+    <div class="welinfo">
+    <span><img src="images/sun.png" alt="天气" /></span>
+    <b><!--/*@thymesVar id="loginUser" type=""*/-->
+    <!--/*@thymesVar id="name" type=""*/-->
+    <span th:text="${session.loginUser.name}"></span>您好，欢迎使用考勤管理系统</b>
+        <!--取session里面的数据-->
+    </div>
+        <span><a href="/druid">Druid数据库后台</a> </span>
+        <span><a href="http://118.89.244.208:15672/">rabbitmq</a> </span>
+    
+    <div class="welinfo">
+    <span><img src="images/time.png" alt="时间" /></span>
+    <i>您本次次登录的时间：<div id="div_timer"></div></i></div>
+
+
+</body>
+<script type="text/javascript">
+    //获取系统时间
+    function showTime() {
+        nowtime = new Date();
+        year = nowtime.getFullYear();//年
+        month = nowtime.getMonth() + 1;//月
+        day = nowtime.getDate();//日
+        hour = nowtime.getHours();//时
+        minutes = nowtime.getMinutes(); //分
+        seconds = nowtime.getSeconds(); //秒
+//文字增加空格
+        document.getElementById("div_timer").style = "white-space:pre;";
+//显示时间
+        document.getElementById("div_timer").innerText = year + "." + month + "." + day + " " + hour + ":" + minutes + ":" + seconds;
+    }
+    showTime();
+    /*setInterval("showTime()", 1000);
+    //月日时分秒小于10补0
+    function p(s) {
+        return s &lt; 10 ? '0' + s : s;
+    }*/
+</script>
+
+</html>

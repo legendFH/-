@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>用户管理</title>
+<link href="../css/style2.css" rel="stylesheet" type="text/css" />
+<link href="../css/select.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="../css/style.css" />
+<link rel="stylesheet" type="text/css" href="../css/WdatePicker.css" />
+<link rel="stylesheet" type="text/css" href="../css/skin_/form.css" />
+<link href="umeditor/themes/default/_css/umeditor.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="../js/jquery.js"></script>
+<script type="text/javascript" src="../js/jquery.idTabs.min.js"></script>
+<script type="text/javascript" src="../js/select-ui.min.js"></script>
+
+<script type="text/javascript" src="../js/global.js"></script>
+<script type="text/javascript" src="../js/jquery.select.js"></script>
+<script type="text/javascript" src="../js/WdatePicker.js"></script>
+<script type="text/javascript" src="../js/umeditor.config.js"></script>
+<script type="text/javascript" src="../js/editor_api.js"></script>
+<script type="text/javascript" src="../umeditor/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript">
+    KE.show({
+        id : 'content7',
+        cssPath : './index.css'
+    });
+  </script>
+  
+<script type="text/javascript">
+$(document).ready(function(e) {
+    $(".select1").uedSelect({
+		width : 345			  
+	});
+	$(".select2").uedSelect({
+		width : 167  
+	});
+	$(".select3").uedSelect({
+		width : 100
+	});
+});
+</script>
+</head>
+
+<body onLoad="goPage(1,5);">
+
+	<div class="place">
+    <span>位置：</span>
+    <ul class="placeul">
+    <li><a href="#">日报管理</a></li>
+    </ul>
+    </div>
+   
+	<!--查询条件-->
+    <br />
+    <br />
+    <form action="/findbyrepname" method="get">
+    <ul class="seachform">
+   <li>
+      <label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;姓名</label><input name="report_name" type="text" class="scinput" /></li>
+    <li>
+      <label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;开始日期</label><input name="" type="text" class="scinput" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" /></li>
+    <li>
+      <label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;结束日期</label><input name="" type="text" class="scinput" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"/></li>
+
+    <li><label>&nbsp;</label><input name="" type="submit" class="scbtn" value="查询"/></li>
+    
+    </ul>
+    </form>
+
+    </div>
+    <div>
+        <b style="color: #5cb85c" th:text="${session.reptip}">
+        </b>
+    </div>
+
+    <div class="tools">
+    
+    	<ul class="toolbar">
+        <li class="click"><span><img src="../images/t01.png" /></span><a href="/reportinsert" target="_self">添加</a></li>
+        <li class="click"><img src="../images/trash.png" /></span><a href="#" target="rightFrame">删除</a></li>
+        </ul>
+    </div>
+    
+    
+   <table class="tablelist">
+              <thead>
+                <tr >
+                <th width="3%"><input name="" type="checkbox" value="" checked="checked" /></th>
+
+                  <th  width="11%">姓名</th>
+                  <th  width="10%">日期</th>
+                  <th  width="9%">作业进度</th>
+                  <th  width="11%">作业内容</th>
+                  <th  width="7%">问题点</th>
+                  <th   width="13%">联络事项</th>
+                  <th  width="8%">操作</th>
+                </tr>
+              </thead>
+       <table class="tablelist" id="idData">
+              <tbody>
+                <tr th:each="rep:${rep}">
+                 <td width="1%"><input NAME="" type="checkbox" value="" /></td>
+
+                  <td width="7%" th:text="${rep.report_name}">admin</td>
+                  <td width="15%" th:text="${rep.report_date}">2013-09-09 </td>
+                  <td width="16%" th:text="${rep.work_process}">100%</td>
+                  <td width="16%" th:text="${rep.work_content}">登录模块详细设计</td>
+                  <td width="16%" th:text="${rep.problem}">&nbsp;</td>
+                  <td width="15%" th:text="${rep.other}">&nbsp;</td>
+                    <td width="13%"><span><a  th:href="@{/reportupdate(i=${rep.report_id})}" class="tablelink"><img src="../images/user_edit.png" />修改</a> <a th:href="@{/delrep(i=${rep.report_id})}" class="tablelink" > <img src="../images/trash.png" />删除</a></span></td>
+
+                </tr>
+
+              </tbody>
+       </table>
+          </table>
+    <table>
+        <tr><td><div id="barcon" name="barcon"></div></td></tr>
+    </table>
+    
+
+    
+    <div class="tip">
+    	<div class="tiptop"><span>提示信息</span><a></a></div>
+        
+      <div class="tipinfo">
+        <span><img src="images/ticon.png" /></span>
+        <div class="tipright">
+        <p>是否确认对信息的修改 ？</p>
+        <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
+        </div>
+        </div>
+        
+        <div class="tipbtn">
+        <input name="" type="button"  class="sure" value="确定" />&nbsp;
+        <input name="" type="button"  class="cancel" value="取消" />
+        </div>
+    
+    </div>
+    
+    
+    
+    
+    </div>
+
+
+    <script type="text/javascript">
+        /**
+         * 分页函数
+         * pno--页数
+         * psize--每页显示记录数
+         * 分页部分是从真实数据行开始，因而存在加减某个常数，以确定真正的记录数
+         * 纯js分页实质是数据行全部加载，通过是否显示属性完成分页功能
+         **/
+        function goPage(pno,psize){
+            var itable = document.getElementById("idData");
+            var num = itable.rows.length;//表格所有行数(所有记录数)
+            console.log(num);
+            var totalPage = 0;//总页数
+            var pageSize = psize;//每页显示行数
+            //总共分几页
+            if(num/pageSize > parseInt(num/pageSize)){
+                totalPage=parseInt(num/pageSize)+1;
+            }else{
+                totalPage=parseInt(num/pageSize);
+            }
+            var currentPage = pno;//当前页数
+            var startRow = (currentPage - 1) * pageSize+1;//开始显示的行  31
+            var endRow = currentPage * pageSize;//结束显示的行   40
+            endRow = (endRow > num)? num : endRow;    40
+            console.log(endRow);
+            //遍历显示数据实现分页
+            for(var i=1;i<(num+1);i++){
+                var irow = itable.rows[i-1];
+                if(i>=startRow && i<=endRow){
+                    irow.style.display = "block";
+                }else{
+                    irow.style.display = "none";
+                }
+            }
+            var pageEnd = document.getElementById("pageEnd");
+            var tempStr = "共"+num+"条记录 分"+totalPage+"页 当前第"+currentPage+"页";
+            if(currentPage>1){
+                tempStr += "<a href=\"#\" onClick=\"goPage("+(1)+","+psize+")\">首页</a>";
+                tempStr += "<a href=\"#\" onClick=\"goPage("+(currentPage-1)+","+psize+")\"><上一页</a>"
+            }else{
+                tempStr += "首页";
+                tempStr += "<上一页";
+            }
+
+            if(currentPage<totalPage){
+                tempStr += "<a href=\"#\" onClick=\"goPage("+(currentPage+1)+","+psize+")\">下一页></a>";
+                tempStr += "<a href=\"#\" onClick=\"goPage("+(totalPage)+","+psize+")\">尾页</a>";
+            }else{
+                tempStr += "下一页>";
+                tempStr += "尾页";
+            }
+
+            document.getElementById("barcon").innerHTML = tempStr;
+
+        }
+    </script>
+    <script type="text/javascript">
+	$('.tablelist tbody tr:odd').addClass('odd');
+	</script>
+</body>
+</html>
